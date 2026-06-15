@@ -167,7 +167,7 @@ else:
         st.warning("Datanya kosong. Coba centang minimal satu tahun di menu filter sidebar ya.")
     else:
         st.title("Donut Shop Customer Analytics")
-        st.caption("Dashboard personal untuk memantau retensi, omset, dan tren loyalitas pelanggan.")
+        st.caption("Dashboard personal untuk memantau retensi, omzet, dan tren loyalitas pelanggan.")
         st.write("")
 
         total_pelanggan_unik = df_filtered_transaksi["Customer_ID"].nunique()
@@ -213,30 +213,27 @@ else:
         with col_grid_left:
             st.subheader("Overview Data")
             
+            # Mengurutkan dari periode terbaru
             df_display = df_churn_tabel.sort_values(by="Bulan", ascending=False).copy()
             
-            styled_df = df_display.style.background_gradient(
-                cmap="Reds", 
-                subset=["Kabur/Absen (Churn)", "Churn Rate (%)"]
-            ).format({
-                "Pelanggan Aktif Bulan Lalu": "{:,}",
-                "Kembali Belanja (Retained)": "{:,}",
-                "Kabur/Absen (Churn)": "{:,}",
-                "Churn Rate (%)": "{:.1f}%"
-            })
-            
+            # Perbaikan utama: Menggunakan konfigurasi kolom bawaan Streamlit (Bebas dari dependensi Matplotlib)
             st.dataframe(
-                styled_df, 
+                df_display, 
                 use_container_width=True, 
                 hide_index=True, 
                 height=400,
                 column_config={
                     "Bulan": "Periode",
                     "Tahun": "Tahun",
-                    "Pelanggan Aktif Bulan Lalu": "Aktif Bulan Lalu",
-                    "Kembali Belanja (Retained)": "Aktif Sekarang",
-                    "Kabur/Absen (Churn)": "Pelanggan Kabur",
-                    "Churn Rate (%)": "Churn Rate"
+                    "Pelanggan Aktif Bulan Lalu": st.column_config.NumberColumn("Aktif Bulan Lalu", format="%d"),
+                    "Kembali Belanja (Retained)": st.column_config.NumberColumn("Aktif Sekarang", format="%d"),
+                    "Kabur/Absen (Churn)": st.column_config.NumberColumn("Pelanggan Kabur", format="%d"),
+                    "Churn Rate (%)": st.column_config.ProgressColumn(
+                        "Churn Rate",
+                        format="%.1f%%",
+                        min_value=0,
+                        max_value=100
+                    )
                 }
             )
 
