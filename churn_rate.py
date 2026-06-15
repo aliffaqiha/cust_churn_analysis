@@ -127,7 +127,7 @@ if "master_data" not in st.session_state:
 
 with st.sidebar:
     st.subheader("Pengaturan Data")
-    st.caption("Klik generate untuk bikin data simulasi penjualan 8 tahun.")
+    st.caption("Klik generate untuk generate data simulasi penjualan")
     
     with st.container(border=True):
         col_btn1, col_btn2 = st.columns(2)
@@ -144,7 +144,7 @@ with st.sidebar:
 
 if st.session_state["master_data"] is None:
     st.title("Donut Shop Customer Analytics")
-    st.info("Dashboard masih kosong nih. Yuk, klik tombol 'Generate' di sidebar kiri buat memproses simulasi datanya.")
+    st.info("Klik tombol 'Generate' di sidebar kiri untuk memulai simulasi")
 else:
     df_master_transaksi = st.session_state["master_data"]
 
@@ -185,7 +185,7 @@ else:
             st.metric("Rata-rata Churn Bulanan", f"{round(rerata_churn, 1)}%")
 
         st.write("")
-        st.subheader("Tren Naik Turun Churn Rate (%)")
+        st.subheader("Trend Customer Churn Rate (%)")
         
         if not df_churn_tabel.empty:
             fig_churn = px.line(
