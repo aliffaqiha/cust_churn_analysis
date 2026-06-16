@@ -2,6 +2,7 @@
 
 Sebuah aplikasi dashboard interaktif berbasis web yang dibangun menggunakan **Streamlit**, **Pandas**, dan **Plotly Express**. Dashboard ini berfungsi sebagai simulator data makro historis sekaligus mesin analisis perilaku konsumen (*customer behavioral analytics*) untuk memantau retensi, pergerakan omset, tren loyalitas, serta menghitung persentase retensi pelanggan (*Churn Rate*) dari bulan ke bulan secara otomatis.
 
+By : **Alif Faqih**
 
 
 ## Fitur Dashboard
@@ -79,4 +80,4 @@ graph TD
     Q --> R[Render Plotly Line Chart: Tren Churn Rate]
     R --> S[Render Tabel Overview Data dengan Progress Bar]
     S --> T[Render Plotly Bar Chart: Distribusi Konsumen Aktif]
-    T --> End
+    T --> E
